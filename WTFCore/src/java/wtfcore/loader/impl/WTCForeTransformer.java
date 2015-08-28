@@ -7,7 +7,9 @@ import org.objectweb.asm.tree.VarInsnNode;
 import wtfcore.loader.AbstractClassTransformer;
 import wtfcore.loader.AbstractMethodTransformer;
 
-
+/**
+ * @author OctarineNoise
+ */
 public class WTCForeTransformer extends AbstractClassTransformer {
 
     public WTCForeTransformer() {

@@ -11,7 +11,9 @@ import net.minecraft.util.JsonUtils;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-
+/**
+ * @author OctarineNoise
+ */
 public class MetadataSection implements IMetadataSection {
 
 	public boolean rotation;

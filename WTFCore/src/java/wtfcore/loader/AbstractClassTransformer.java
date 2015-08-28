@@ -15,6 +15,9 @@ import com.google.common.collect.Maps;
 
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
 
+/**
+ * @author OctarineNoise
+ */
 
 public abstract class AbstractClassTransformer implements IClassTransformer {
 

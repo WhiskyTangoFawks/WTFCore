@@ -3,7 +3,9 @@ package wtfcore.loader.impl;
 import java.util.Map;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
-
+/**
+ * @author OctarineNoise
+ */
 @IFMLLoadingPlugin.TransformerExclusions({"mods.betterfoliage.loader"})
 public class BetterFoliageLoader implements IFMLLoadingPlugin {
 

@@ -10,7 +10,9 @@ import net.minecraft.util.ResourceLocation;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
+/**
+ * @author OctarineNoise
+ */
 public class TextureMatcher {
 
 	public static String DEFAULT_TYPE = "default";

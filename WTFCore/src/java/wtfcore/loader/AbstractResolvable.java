@@ -1,5 +1,7 @@
 package wtfcore.loader;
-
+/**
+ * @author OctarineNoise
+ */
 public abstract class AbstractResolvable<T> {
 
 	public T resolvedObj;

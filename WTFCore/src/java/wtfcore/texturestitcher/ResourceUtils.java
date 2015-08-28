@@ -15,7 +15,9 @@ import net.minecraft.util.ResourceLocation;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
-
+/**
+ * @author OctarineNoise
+ */
 public class ResourceUtils {
 
 	/** Hide constructor */

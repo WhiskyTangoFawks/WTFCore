@@ -8,7 +8,9 @@ import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
-
+/**
+ * @author OctarineNoise
+ */
 public abstract class AbstractMethodTransformer {
 
     /** Instruction node filter

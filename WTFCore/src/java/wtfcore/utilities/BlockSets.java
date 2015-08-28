@@ -7,21 +7,26 @@ import net.minecraft.init.Blocks;
 import wtfcore.tweaksmethods.FracMethods;
 import wtfcore.tweaksmethods.FracMethods.IFracture;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameData;
 
 
 public class BlockSets {
 
 	private static HashMap<Block, Integer> fallingBlocks = new HashMap<Block, Integer>();
-	private static HashMap<Block, IFracture> oreBlocks = new HashMap<Block, IFracture>();
-	private static HashMap<Block, Block> stoneBlocks = new HashMap<Block, Block>();
+	private static HashMap<Block, IFracture> oreAndFractures = new HashMap<Block, IFracture>();
+	private static HashMap<Block, Block> stoneAndCobble = new HashMap<Block, Block>();
 	private static HashMap<Block, Integer> explosiveBlocks = new HashMap<Block, Integer>();
 	public static HashMap<OreBlockInfo, Block> oreUbifier = new HashMap <OreBlockInfo, Block>();
+	
+	//explosive Backstop
 	public static HashMap <Block,Float> explosiveModBlock = new HashMap<Block, Float>();
-
+	
+	public static HashSet<String> defaultFallingBlocks = new HashSet<String>();
+	
 	//WorldGenHashSets
 	public static HashSet<Block> ReplaceHashset = new HashSet<Block>();
 	public static HashSet<Block> surfaceBlocks = new HashSet<Block>();
-	public static HashMap<BlockInfo, Block> floorBlock = new HashMap<BlockInfo, Block>();
+	public static HashMap<BlockInfo, Block> blockTransformer = new HashMap<BlockInfo, Block>();
 	public static HashSet<Block> meltBlocks = new HashSet<Block>();
 
 
@@ -35,19 +40,19 @@ public class BlockSets {
 		//put config options controlling whether blocks get added to the hashsets
 
 		//WTFTweaks HashSets
-		addFallingBlock(Blocks.cobblestone, 1, 1);
-		addFallingBlock(Blocks.mossy_cobblestone, 1, 1);
-		addFallingBlock(Blocks.dirt, 2, 1);
-		addFallingBlock(Blocks.grass, 1, 1);
+		addDefaultFallingBlock(Blocks.cobblestone, 1);
+		addDefaultFallingBlock(Blocks.mossy_cobblestone, 1);
+		addDefaultFallingBlock(Blocks.dirt, 2);
+		addDefaultFallingBlock(Blocks.grass, 1);
 
-		addOreBlock(Blocks.iron_ore);
-		addOreBlock(Blocks.diamond_ore);
-		addOreBlock(Blocks.lapis_ore);
-		addOreBlock(Blocks.gold_ore);
-		addOreBlock(Blocks.emerald_ore);
-		addOreBlock(Blocks.redstone_ore);
-		addOreBlock(Blocks.lit_redstone_ore);
-		addOreBlock(Blocks.coal_ore);
+		addOreBlock(Blocks.iron_ore, FracMethods.defaultfrac);
+		addOreBlock(Blocks.diamond_ore, FracMethods.defaultfrac);
+		addOreBlock(Blocks.lapis_ore, FracMethods.defaultfrac);
+		addOreBlock(Blocks.gold_ore, FracMethods.defaultfrac);
+		addOreBlock(Blocks.emerald_ore, FracMethods.defaultfrac);
+		addOreBlock(Blocks.redstone_ore, FracMethods.defaultfrac);
+		addOreBlock(Blocks.lit_redstone_ore, FracMethods.defaultfrac);
+		addOreBlock(Blocks.coal_ore, FracMethods.defaultfrac);
 
 		addStoneBlock(Blocks.stone, Blocks.cobblestone, 1);
 
@@ -61,8 +66,8 @@ public class BlockSets {
 		addExplosiveBlock(Blocks.redstone_torch, 1);
 
 		if (Loader.isModLoaded("UndergroundBiomes")){
-			addFallingBlock(UBCblocks.MetamorphicCobblestone, 1, 8);
-			addFallingBlock(UBCblocks.IgneousCobblestone, 1, 8);
+			addDefaultFallingBlock(UBCblocks.MetamorphicCobblestone, 1);
+			addDefaultFallingBlock(UBCblocks.IgneousCobblestone, 1);
 
 			addStoneBlock(UBCblocks.IgneousStone, UBCblocks.IgneousCobblestone, 8);
 			addStoneBlock(UBCblocks.MetamorphicStone, UBCblocks.MetamorphicCobblestone, 8);
@@ -97,8 +102,8 @@ public class BlockSets {
 
 
 		if (Loader.isModLoaded("CaveBiomes")){
-			floorBlock.put(new BlockInfo(Blocks.stone, 0, Modifier.cobblestone), Blocks.cobblestone);
-			floorBlock.put(new BlockInfo(Blocks.stone, 0, Modifier.mossy_cobblestone), Blocks.mossy_cobblestone);
+			blockTransformer.put(new BlockInfo(Blocks.stone, 0, Modifier.cobblestone), Blocks.cobblestone);
+			blockTransformer.put(new BlockInfo(Blocks.stone, 0, Modifier.mossy_cobblestone), Blocks.mossy_cobblestone);
 
 		}
 
@@ -111,33 +116,30 @@ public class BlockSets {
 			ReplaceHashset.add(UBCblocks.IgneousStone);
 			ReplaceHashset.add(UBCblocks.MetamorphicStone);
 			ReplaceHashset.add(UBCblocks.SedimentaryStone);
-			floorBlock.put(new BlockInfo(UBCblocks.IgneousStone, 0, Modifier.cobblestone), UBCblocks.IgneousCobblestone);
-			floorBlock.put(new BlockInfo(UBCblocks.MetamorphicStone, 0, Modifier.cobblestone), UBCblocks.MetamorphicCobblestone);
+			blockTransformer.put(new BlockInfo(UBCblocks.IgneousStone, 0, Modifier.cobblestone), UBCblocks.IgneousCobblestone);
+			blockTransformer.put(new BlockInfo(UBCblocks.MetamorphicStone, 0, Modifier.cobblestone), UBCblocks.MetamorphicCobblestone);
 		}
 
 	}
 
-	public static void addExplosiveBlock(Block block, int size){
-		explosiveBlocks.put(block, size);
+	public static void addDefaultFallingBlock(Block block, int stability){
+		defaultFallingBlocks.add(GameData.getBlockRegistry().getNameForObject(block)+"@"+stability+",");
 	}
-
-	public static void addFallingBlock(Block block, int stability){
-		addFallingBlock(block, stability, 0);
-	}
-
-	public static void addFallingBlock(Block block, int stability, int metaloop){
+	
+	public static void addGravity(Block block, int stability){
 		fallingBlocks.put(block, stability);
-
-
 	}
 
 	public static void addStoneBlock(Block key, Block value, int metaloop){
-		stoneBlocks.put(key, value);
+		stoneAndCobble.put(key, value);
 	}
 	public static void addStoneBlock(Block key, Block value){
 		addStoneBlock(key, value, 0);
 	}
-
+	public static void addExplosiveBlock(Block block, int size){
+		explosiveBlocks.put(block, size);
+	}
+	
 	public static boolean isExplosive(Block block){
 		return explosiveBlocks.containsKey(block);
 	}
@@ -145,8 +147,8 @@ public class BlockSets {
 		return explosiveBlocks.get(block);
 	}
 
-	public static void addOreBlock(Block block){
-		oreBlocks.put(block, new FracMethods.DefaultFrac());
+	public static void addOreBlock(Block block, FracMethods.IFracture frac){
+		oreAndFractures.put(block,frac);
 	}
 	public static boolean shouldFall(Block block){
 		return fallingBlocks.containsKey(block);
@@ -155,19 +157,19 @@ public class BlockSets {
 		return fallingBlocks.get(block);
 	}
 	public static boolean isOre(Block block){
-		return oreBlocks.containsKey(block);
+		return oreAndFractures.containsKey(block);
 	}
 	public static IFracture getFrac(Block block){
-		return oreBlocks.get(block);
+		return oreAndFractures.get(block);
 	}
 	public static boolean isStone(Block block){
-		return stoneBlocks.containsKey(block);
+		return stoneAndCobble.containsKey(block);
 	}
 	public static Block getCobblestone(Block key){
-		return stoneBlocks.get(key);
+		return stoneAndCobble.get(key);
 	}
 	public static boolean isCobblestone(Block block){
-		return stoneBlocks.containsValue(block);
+		return stoneAndCobble.containsValue(block);
 	}
 	
 

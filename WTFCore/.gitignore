@@ -1,0 +1,12 @@
+/bin/
+/build/
+/config/
+/crash-reports/
+/gradle/
+/libs/
+/logs/
+/mods/
+/resourcepacks/
+/saves/
+/.gradle/
+/.settings/

@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
+import wtfcore.utilities.BlockInfo;
 import wtfcore.utilities.BlockSets;
 
 public class FracMethods {
@@ -17,6 +18,8 @@ public class FracMethods {
 		void fracture(World world, int x, int y, int z);		
 	}
 
+	public static IFracture defaultfrac = new DefaultFrac();
+	
 	public static class DefaultFrac implements IFracture{
 
 		@Override
@@ -32,15 +35,13 @@ public class FracMethods {
 		}
 
 	}
-
+	
+	public static IFracture wtforesfrac = new DefaultFrac();
 	public static class WTFOresFrac implements IFracture{
 
 		@Override
 		public void fracture(World world, int x, int y, int z) {
 			HashSet<ChunkPosition> hashset = new HashSet<ChunkPosition>();
-
-			//modify the WTFOres hashmap to include ore level, required for breaking, and to influence fracturing
-			//event.getPlayer().getHeldItem().get
 
 			for (int loop = 0; loop < 4; loop++){
 				//first, it attempts to fracture an adjacent block
@@ -81,12 +82,9 @@ public class FracMethods {
 				if  (BlockSets.isStone(blockToFracture)){
 					hashset.add(new ChunkPosition(x+(fracX), y+(fracY), z+(fracZ)));
 				}
-
-
 			}
 			FracIterator(world, hashset);
 		}
-
 	}
 
 
@@ -95,8 +93,17 @@ public class FracMethods {
 		Iterator<ChunkPosition> iterator = hashset.iterator();
 		while (iterator.hasNext()){
 			chunkposition = (ChunkPosition)iterator.next();
-			WTFmethods.Fracture(chunkposition.chunkPosX, chunkposition.chunkPosY, chunkposition.chunkPosZ, world);
+			fracStone(chunkposition.chunkPosX, chunkposition.chunkPosY, chunkposition.chunkPosZ, world);
 		}
-
 	}
+	
+	public static boolean fracStone(int x, int y, int z, World world){
+		Block blockToSet = BlockSets.blockTransformer.get(new BlockInfo(world.getBlock(x, y, z), world.getBlockMetadata(x, y, z), BlockSets.Modifier.cobblestone));
+		if (blockToSet != null) { 
+			world.setBlock(x,  y,  z, blockToSet);
+			return true;
+		}
+		return false;
+	}
+	
 }

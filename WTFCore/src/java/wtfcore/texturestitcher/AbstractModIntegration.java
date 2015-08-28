@@ -2,7 +2,9 @@ package wtfcore.texturestitcher;
 
 import wtfcore.loader.AbstractResolvable;
 
-
+/**
+ * @author OctarineNoise
+ */
 public abstract class AbstractModIntegration {
 
 	protected static boolean isSomeAvailable(Iterable<AbstractResolvable<?>> elements) {
