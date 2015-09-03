@@ -75,11 +75,11 @@ public class FracMethods {
 					blockToFracture = world.getBlock(x+fracX, y+fracY, z+fracZ);
 				}
 
-				if  (BlockSets.isStone(blockToFracture)){
+				if  (BlockSets.hasCobblestone(blockToFracture)){
 					hashset.add(new ChunkPosition(x+fracX, y+fracY, z+fracZ));
 				}
 
-				if  (BlockSets.isStone(blockToFracture)){
+				if  (BlockSets.hasCobblestone(blockToFracture)){
 					hashset.add(new ChunkPosition(x+(fracX), y+(fracY), z+(fracZ)));
 				}
 			}
@@ -100,7 +100,7 @@ public class FracMethods {
 	public static boolean fracStone(int x, int y, int z, World world){
 		Block blockToSet = BlockSets.blockTransformer.get(new BlockInfo(world.getBlock(x, y, z), world.getBlockMetadata(x, y, z), BlockSets.Modifier.cobblestone));
 		if (blockToSet != null) { 
-			world.setBlock(x,  y,  z, blockToSet);
+			world.setBlock(x,  y,  z, blockToSet, world.getBlockMetadata(x, y, z), 3);
 			return true;
 		}
 		return false;

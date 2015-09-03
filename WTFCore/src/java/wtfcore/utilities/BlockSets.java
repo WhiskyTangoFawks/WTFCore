@@ -2,6 +2,8 @@ package wtfcore.utilities;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import wtfcore.tweaksmethods.FracMethods;
@@ -54,12 +56,11 @@ public class BlockSets {
 		addOreBlock(Blocks.lit_redstone_ore, FracMethods.defaultfrac);
 		addOreBlock(Blocks.coal_ore, FracMethods.defaultfrac);
 
-		addStoneBlock(Blocks.stone, Blocks.cobblestone, 1);
+		//addStoneBlock(Blocks.stone, Blocks.cobblestone, 1);
 
 		explosiveModBlock.put(Blocks.iron_block, 0.8F);
 		explosiveModBlock.put(Blocks.diamond_block, 0.5F);
 		explosiveModBlock.put(Blocks.obsidian, 0.2F);
-
 
 		addExplosiveBlock(Blocks.redstone_ore, 2);
 		addExplosiveBlock(Blocks.lit_redstone_ore, 3);
@@ -69,8 +70,8 @@ public class BlockSets {
 			addDefaultFallingBlock(UBCblocks.MetamorphicCobblestone, 1);
 			addDefaultFallingBlock(UBCblocks.IgneousCobblestone, 1);
 
-			addStoneBlock(UBCblocks.IgneousStone, UBCblocks.IgneousCobblestone, 8);
-			addStoneBlock(UBCblocks.MetamorphicStone, UBCblocks.MetamorphicCobblestone, 8);
+			//addStoneBlock(UBCblocks.IgneousStone, UBCblocks.IgneousCobblestone, 8);
+			//addStoneBlock(UBCblocks.MetamorphicStone, UBCblocks.MetamorphicCobblestone, 8);
 		}
 
 		//CaveBiomesWorldGenerationHashSets		
@@ -100,13 +101,8 @@ public class BlockSets {
 		surfaceBlocks.add(Blocks.stone);
 		surfaceBlocks.add(Blocks.water);
 
-
-		if (Loader.isModLoaded("CaveBiomes")){
-			blockTransformer.put(new BlockInfo(Blocks.stone, 0, Modifier.cobblestone), Blocks.cobblestone);
-			blockTransformer.put(new BlockInfo(Blocks.stone, 0, Modifier.mossy_cobblestone), Blocks.mossy_cobblestone);
-
-		}
-
+		blockTransformer.put(new BlockInfo(Blocks.stone, 0, Modifier.cobblestone), Blocks.cobblestone);
+		blockTransformer.put(new BlockInfo(Blocks.stone, 0, Modifier.mossy_cobblestone), Blocks.mossy_cobblestone);
 
 		if (Loader.isModLoaded("UndergroundBiomes"))
 		{
@@ -119,7 +115,14 @@ public class BlockSets {
 			blockTransformer.put(new BlockInfo(UBCblocks.IgneousStone, 0, Modifier.cobblestone), UBCblocks.IgneousCobblestone);
 			blockTransformer.put(new BlockInfo(UBCblocks.MetamorphicStone, 0, Modifier.cobblestone), UBCblocks.MetamorphicCobblestone);
 		}
-
+		
+		Iterator<BlockInfo> cobbleIterator = blockTransformer.keySet().iterator();
+		while (cobbleIterator.hasNext()){
+			BlockInfo blockinfo = cobbleIterator.next();
+			if (blockinfo.addon == Modifier.cobblestone){
+				stoneAndCobble.put(blockinfo.block, blockTransformer.get(blockinfo));
+			}
+		}
 	}
 
 	public static void addDefaultFallingBlock(Block block, int stability){
@@ -130,12 +133,6 @@ public class BlockSets {
 		fallingBlocks.put(block, stability);
 	}
 
-	public static void addStoneBlock(Block key, Block value, int metaloop){
-		stoneAndCobble.put(key, value);
-	}
-	public static void addStoneBlock(Block key, Block value){
-		addStoneBlock(key, value, 0);
-	}
 	public static void addExplosiveBlock(Block block, int size){
 		explosiveBlocks.put(block, size);
 	}
@@ -162,7 +159,7 @@ public class BlockSets {
 	public static IFracture getFrac(Block block){
 		return oreAndFractures.get(block);
 	}
-	public static boolean isStone(Block block){
+	public static boolean hasCobblestone(Block block){
 		return stoneAndCobble.containsKey(block);
 	}
 	public static Block getCobblestone(Block key){

@@ -25,8 +25,7 @@ public class ChildBlockCustomMetadata extends Block{
 		super(block.getMaterial());
 		this.parentBlock = block;
 		this.parentMeta = meta;
-		this.setStepSound(parentBlock.stepSound);
-		this.setHarvestLevel(parentBlock.getHarvestTool(parentMeta), parentBlock.getHarvestLevel(parentMeta));
+		//this.setHarvestLevel(parentBlock.getHarvestTool(parentMeta), parentBlock.getHarvestLevel(parentMeta));
 		//this.setCreativeTab(CaveBiomes.tabCaveDecorations);
 	}
 
@@ -47,8 +46,7 @@ public class ChildBlockCustomMetadata extends Block{
 	@SideOnly(Side.CLIENT)
     public int getRenderType(){
 		return parentBlock.getRenderType();
-		}
-
+	}
 
     @Override
 	@SideOnly(Side.CLIENT)
@@ -133,12 +131,12 @@ public class ChildBlockCustomMetadata extends Block{
     @Override
     public String getHarvestTool(int metadata)
     {
-        return parentBlock.getHarvestTool(metadata);
+        return parentBlock.getHarvestTool(this.parentMeta);
     }
     @Override
     public int getHarvestLevel(int metadata)
     {
-        return parentBlock.getHarvestLevel(metadata);
+        return parentBlock.getHarvestLevel(this.parentMeta);
     }
     @Override
     public int getFlammability(IBlockAccess world, int x, int y, int z, ForgeDirection face)

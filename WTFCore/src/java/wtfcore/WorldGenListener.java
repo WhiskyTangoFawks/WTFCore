@@ -20,7 +20,7 @@ public class WorldGenListener {
 	public void populate(PopulateChunkEvent.Post event){
 
 		WorldScanner scanner = GetScanner.get(event.world.provider.dimensionId);
-		if (scanner != null){
+		if (event.world.provider.dimensionId == 0 && scanner != null){
 			scanner.generateSurface(event.world, event.rand, event.chunkX<< 4, event.chunkZ<< 4);
 		}
 
