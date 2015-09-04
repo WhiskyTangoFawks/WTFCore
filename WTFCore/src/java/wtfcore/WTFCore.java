@@ -4,7 +4,8 @@ import net.minecraftforge.common.MinecraftForge;
 import wtfcore.proxy.CommonProxy;
 import wtfcore.utilities.BlockSets;
 import wtfcore.utilities.UBCblocks;
-import wtfcore.worldgen.WorldScanner;
+import wtfcore.worldgen.NetherScanner;
+import wtfcore.worldgen.OverworldScanner;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -12,6 +13,8 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
+import java.util.Iterator;
 
 import org.apache.logging.log4j.Logger;
 
@@ -36,8 +39,20 @@ public class WTFCore {
 		log = preEvent.getModLog();
 		
 		//Load a default scanner into the hashmap for the overworld
-		WorldGenListener.GetScanner.put(0, new WorldScanner());
 		
+		WTFCoreConfig.customConfig();
+		
+		Iterator<Integer> iterator = WTFCoreConfig.overworlds.iterator();
+		while (iterator.hasNext()){
+			int dimensionID = iterator.next();
+			WorldGenListener.GetScanner.put(dimensionID, new OverworldScanner());	
+		}
+		iterator = WTFCoreConfig.nethers.iterator();
+		while (iterator.hasNext()){
+			int dimensionID = iterator.next();
+			WorldGenListener.GetScanner.put(dimensionID, new NetherScanner());	
+		}
+
 		if (Loader.isModLoaded("UndergroundBiomes")){
 			UBCblocks.loadUBCStone();
 		}

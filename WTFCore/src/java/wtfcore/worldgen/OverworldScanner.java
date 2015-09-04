@@ -6,9 +6,9 @@ import net.minecraft.world.World;
 import wtfcore.WorldGenListener;
 import wtfcore.utilities.BlockSets;
 
-public class WorldScanner {
+public class OverworldScanner implements IWorldScanner {
 	
-	public void generateSurface(World world, Random rand, int chunkX, int chunkZ)
+	public void generate(World world, Random rand, int chunkX, int chunkZ)
 	{
 		//WTFCore.log.info("Vanilla generator running");
 		int lastY = 70;

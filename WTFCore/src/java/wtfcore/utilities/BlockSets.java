@@ -5,11 +5,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockOre;
 import net.minecraft.init.Blocks;
 import wtfcore.tweaksmethods.FracMethods;
 import wtfcore.tweaksmethods.FracMethods.IFracture;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameData;
+import exterminatorJeff.undergroundBiomes.common.block.BlockUBOre;
 
 
 public class BlockSets {
@@ -154,7 +156,16 @@ public class BlockSets {
 		return fallingBlocks.get(block);
 	}
 	public static boolean isOre(Block block){
-		return oreAndFractures.containsKey(block);
+		if (oreAndFractures.containsKey(block)){
+			return true;
+		}
+		else if (Loader.isModLoaded("UndergroundBiomes") && block instanceof BlockUBOre){
+			return true;
+		}
+		else if (block instanceof BlockOre){
+			return true;
+		}
+		return false;
 	}
 	public static IFracture getFrac(Block block){
 		return oreAndFractures.get(block);

@@ -96,5 +96,7 @@ public class CustomTextureEnumerator implements IIconRegister{
 		if (event.map.getTextureType() != 0) return;
 		blockTextures = null;
 	}
+	
+
 
 }

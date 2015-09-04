@@ -83,7 +83,7 @@ public class CustomTextureGenerator extends BlockTextureGenerator{
 		}
 
 		if (maskResource == null){
-			WTFCore.log.info("AlphaMask loading failed for " + blockResourceLocation.toString());
+			//WTFCore.log.info("AlphaMask loading failed for " + blockResourceLocation.toString());
 			maskLocation = textureinfo.overlayDomain+masktype+"_16.png";
 			maskResource = resourceManager.getResource(new ResourceLocation(maskLocation));
 			BufferedImage maskImage =  ImageIO.read(maskResource.getInputStream());

@@ -2,7 +2,7 @@ package wtfcore;
 
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import wtfcore.worldgen.IWTFGenerator;
-import wtfcore.worldgen.WorldScanner;
+import wtfcore.worldgen.IWorldScanner;
 import java.util.HashMap;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -11,7 +11,7 @@ public class WorldGenListener {
 	
 	public static IWTFGenerator generator;
 	
-	public static HashMap<Integer, WorldScanner> GetScanner = new HashMap<Integer, WorldScanner>();
+	public static HashMap<Integer, IWorldScanner> GetScanner = new HashMap<Integer, IWorldScanner>();
 	
 	
 	//This listens for chunk population, then tries to pull a generator from the hashmap based on the dimension ID
@@ -19,9 +19,12 @@ public class WorldGenListener {
 	@SubscribeEvent(priority=EventPriority.LOWEST)
 	public void populate(PopulateChunkEvent.Post event){
 
-		WorldScanner scanner = GetScanner.get(event.world.provider.dimensionId);
-		if (event.world.provider.dimensionId == 0 && scanner != null){
-			scanner.generateSurface(event.world, event.rand, event.chunkX<< 4, event.chunkZ<< 4);
+		IWorldScanner scanner = GetScanner.get(event.world.provider.dimensionId);
+		if (scanner != null){
+			scanner.generate(event.world, event.rand, event.chunkX<< 4, event.chunkZ<< 4);
+		}
+		else {
+			WTFCore.log.info("No scanner found for dimension " + event.world.provider.dimensionId);
 		}
 
 	}
