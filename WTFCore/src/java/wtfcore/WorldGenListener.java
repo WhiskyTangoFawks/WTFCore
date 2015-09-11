@@ -21,7 +21,9 @@ public class WorldGenListener {
 
 		IWorldScanner scanner = GetScanner.get(event.world.provider.dimensionId);
 		if (scanner != null){
+			
 			scanner.generate(event.world, event.rand, event.chunkX<< 4, event.chunkZ<< 4);
+			
 		}
 		else {
 			WTFCore.log.info("No scanner found for dimension " + event.world.provider.dimensionId);

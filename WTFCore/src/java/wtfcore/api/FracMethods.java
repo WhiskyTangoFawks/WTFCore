@@ -1,4 +1,4 @@
-package wtfcore.tweaksmethods;
+package wtfcore.api;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -7,8 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
-import wtfcore.utilities.BlockInfo;
-import wtfcore.utilities.BlockSets;
+
 
 public class FracMethods {
 
@@ -50,7 +49,7 @@ public class FracMethods {
 				int fracZ = 0;
 
 				Block blockToFracture = Blocks.cobblestone;
-				while (BlockSets.isCobblestone(blockToFracture)){
+				while (BlockSets.stoneAndCobble.containsValue(blockToFracture)){
 					int frac = random.nextInt(6);
 					switch (frac){
 					case 0 :
@@ -75,11 +74,11 @@ public class FracMethods {
 					blockToFracture = world.getBlock(x+fracX, y+fracY, z+fracZ);
 				}
 
-				if  (BlockSets.hasCobblestone(blockToFracture)){
+				if  (BlockSets.stoneAndCobble.containsKey(blockToFracture)){
 					hashset.add(new ChunkPosition(x+fracX, y+fracY, z+fracZ));
 				}
 
-				if  (BlockSets.hasCobblestone(blockToFracture)){
+				if  (BlockSets.stoneAndCobble.containsKey(blockToFracture)){
 					hashset.add(new ChunkPosition(x+(fracX), y+(fracY), z+(fracZ)));
 				}
 			}

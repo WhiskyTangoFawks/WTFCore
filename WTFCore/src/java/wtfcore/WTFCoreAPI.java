@@ -1,11 +1,11 @@
 package wtfcore;
 
+import net.minecraft.block.Block;
+import wtfcore.api.BlockInfo;
+import wtfcore.api.BlockSets;
+
 public class WTFCoreAPI {
 
-	//add a cave type
-	//add surface generation
-	//add a stone type for stalactites
-	//add a block for surface recognition
-	//add a stone-modifier pair to floor generation
+	
 
 }

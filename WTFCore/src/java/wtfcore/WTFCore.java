@@ -1,8 +1,9 @@
 package wtfcore;
 
 import net.minecraftforge.common.MinecraftForge;
+import wtfcore.api.BlockSets;
 import wtfcore.proxy.CommonProxy;
-import wtfcore.utilities.BlockSets;
+import wtfcore.utilities.LoadBlockSets;
 import wtfcore.utilities.UBCblocks;
 import wtfcore.worldgen.NetherScanner;
 import wtfcore.worldgen.OverworldScanner;
@@ -18,7 +19,7 @@ import java.util.Iterator;
 
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = WTFCore.modid, name = "WTFCore", version = "1.52",  dependencies = "after:UndergroundBiomes")
+@Mod(modid = WTFCore.modid, name = "WTFCore", version = "1.6",  dependencies = "after:UndergroundBiomes")
 
 public class WTFCore {
 
@@ -45,12 +46,14 @@ public class WTFCore {
 		Iterator<Integer> iterator = WTFCoreConfig.overworlds.iterator();
 		while (iterator.hasNext()){
 			int dimensionID = iterator.next();
-			WorldGenListener.GetScanner.put(dimensionID, new OverworldScanner());	
+			WorldGenListener.GetScanner.put(dimensionID, new OverworldScanner());
+			WTFCore.log.info("Adding default overworld scanner for dimension " + dimensionID);
 		}
 		iterator = WTFCoreConfig.nethers.iterator();
 		while (iterator.hasNext()){
 			int dimensionID = iterator.next();
 			WorldGenListener.GetScanner.put(dimensionID, new NetherScanner());	
+			WTFCore.log.info("Adding default nether scanner for dimension " + dimensionID);
 		}
 
 		if (Loader.isModLoaded("UndergroundBiomes")){
@@ -67,7 +70,7 @@ public class WTFCore {
 	@EventHandler
 	public void PostInit(FMLPostInitializationEvent postEvent){
 
-		BlockSets.setHashSets();
+		LoadBlockSets.setHashSets();
 
 
 

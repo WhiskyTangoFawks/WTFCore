@@ -10,11 +10,13 @@ public class WTFCoreConfig {
 	static Configuration config = new Configuration(new File("config/WTFCoreConfig.cfg"));
 
 	
-	static HashSet<Integer> overworlds = new HashSet<Integer>();
-	static HashSet<Integer> nethers = new HashSet<Integer>();;
+	public static HashSet<Integer> overworlds = new HashSet<Integer>();
+	public static HashSet<Integer> nethers = new HashSet<Integer>();;
 	
 	public static void customConfig() {
 		config.load();
+		
+
 		
 		String overworldIDs = config.get("Dimension IDs", "List of Dimension IDs to run OverworldScanner on", "0").getString();
 		String[] OverworldArray = overworldIDs.split(",");

@@ -1,4 +1,4 @@
-package wtfcore.utilities;
+package wtfcore.api;
 
 import net.minecraft.block.Block;
 
