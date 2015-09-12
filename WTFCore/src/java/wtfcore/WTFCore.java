@@ -19,7 +19,7 @@ import java.util.Iterator;
 
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = WTFCore.modid, name = "WTFCore", version = "1.6",  dependencies = "after:UndergroundBiomes")
+@Mod(modid = WTFCore.modid, name = "WTFCore", version = "1.61",  dependencies = "after:UndergroundBiomes")
 
 public class WTFCore {
 
