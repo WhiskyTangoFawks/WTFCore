@@ -3,7 +3,6 @@ package wtfcore.worldgen;
 import java.util.Random;
 
 import net.minecraft.world.World;
-import wtfcore.WorldGenListener;
 
 public class NetherScanner implements IWorldScanner{
 

@@ -1,8 +1,8 @@
-package wtfcore;
+package wtfcore.worldgen;
 
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
-import wtfcore.worldgen.IWTFGenerator;
-import wtfcore.worldgen.IWorldScanner;
+import wtfcore.WTFCore;
+
 import java.util.HashMap;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -20,7 +20,7 @@ public class WorldGenListener {
 	public void populate(PopulateChunkEvent.Post event){
 
 		IWorldScanner scanner = GetScanner.get(event.world.provider.dimensionId);
-		if (scanner != null){
+		if (scanner != null && !event.world.isRemote){
 			
 			scanner.generate(event.world, event.rand, event.chunkX<< 4, event.chunkZ<< 4);
 			

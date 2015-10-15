@@ -10,9 +10,8 @@ import net.minecraft.block.BlockOre;
 import net.minecraft.init.Blocks;
 import wtfcore.api.BlockInfo;
 import wtfcore.api.BlockSets;
-import wtfcore.api.FracMethods;
-import wtfcore.api.FracMethods.IFracture;
 import wtfcore.api.BlockSets.Modifier;
+
 
 public class LoadBlockSets {
 
@@ -26,14 +25,14 @@ public class LoadBlockSets {
 		addDefaultFallingBlock(Blocks.dirt, 2);
 		addDefaultFallingBlock(Blocks.grass, 1);
 
-		addOreBlock(Blocks.iron_ore, FracMethods.defaultfrac);
-		addOreBlock(Blocks.diamond_ore, FracMethods.defaultfrac);
-		addOreBlock(Blocks.lapis_ore, FracMethods.defaultfrac);
-		addOreBlock(Blocks.gold_ore, FracMethods.defaultfrac);
-		addOreBlock(Blocks.emerald_ore, FracMethods.defaultfrac);
-		addOreBlock(Blocks.redstone_ore, FracMethods.defaultfrac);
-		addOreBlock(Blocks.lit_redstone_ore, FracMethods.defaultfrac);
-		addOreBlock(Blocks.coal_ore, FracMethods.defaultfrac);
+		addOreBlock(Blocks.iron_ore);
+		addOreBlock(Blocks.diamond_ore);
+		addOreBlock(Blocks.lapis_ore);
+		addOreBlock(Blocks.gold_ore);
+		addOreBlock(Blocks.emerald_ore);
+		addOreBlock(Blocks.redstone_ore);
+		addOreBlock(Blocks.lit_redstone_ore);
+		addOreBlock(Blocks.coal_ore);
 
 		BlockSets.explosiveModBlock.put(Blocks.iron_block, 0.8F);
 		BlockSets.explosiveModBlock.put(Blocks.diamond_block, 0.5F);
@@ -83,6 +82,9 @@ public class LoadBlockSets {
 		{
 			BlockSets.blockTransformer.put(new BlockInfo(UBCblocks.IgneousStone, 0, Modifier.cobblestone), UBCblocks.IgneousCobblestone);
 			BlockSets.blockTransformer.put(new BlockInfo(UBCblocks.MetamorphicStone, 0, Modifier.cobblestone), UBCblocks.MetamorphicCobblestone);
+			BlockSets.surfaceBlocks.add(UBCblocks.IgneousStone);
+			BlockSets.surfaceBlocks.add(UBCblocks.MetamorphicStone);
+			BlockSets.surfaceBlocks.add(UBCblocks.SedimentaryStone);
 		}
 
 		Iterator<BlockInfo> cobbleIterator = BlockSets.blockTransformer.keySet().iterator();
@@ -113,8 +115,8 @@ public class LoadBlockSets {
 		return BlockSets.explosiveBlocks.get(block);
 	}
 
-	public static void addOreBlock(Block block, FracMethods.IFracture frac){
-		BlockSets.oreAndFractures.put(block,frac);
+	public static void addOreBlock(Block block){
+		BlockSets.oreAndFractures.add(block);
 	}
 	public static boolean shouldFall(Block block){
 		return BlockSets.fallingBlocks.containsKey(block);
@@ -123,7 +125,7 @@ public class LoadBlockSets {
 		return BlockSets.fallingBlocks.get(block);
 	}
 	public static boolean isOre(Block block){
-		if (BlockSets.oreAndFractures.containsKey(block)){
+		if (BlockSets.oreAndFractures.contains(block)){
 			return true;
 		}
 		else if (Loader.isModLoaded("UndergroundBiomes") && block instanceof BlockUBOre){
@@ -134,9 +136,7 @@ public class LoadBlockSets {
 		}
 		return false;
 	}
-	public static IFracture getFrac(Block block){
-		return BlockSets.oreAndFractures.get(block);
-	}
+	
 	public static boolean hasCobblestone(Block block){
 		return BlockSets.stoneAndCobble.containsKey(block);
 	}

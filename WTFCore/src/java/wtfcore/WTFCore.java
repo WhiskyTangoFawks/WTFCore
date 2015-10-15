@@ -7,6 +7,7 @@ import wtfcore.utilities.LoadBlockSets;
 import wtfcore.utilities.UBCblocks;
 import wtfcore.worldgen.NetherScanner;
 import wtfcore.worldgen.OverworldScanner;
+import wtfcore.worldgen.WorldGenListener;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -19,7 +20,7 @@ import java.util.Iterator;
 
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = WTFCore.modid, name = "WTFCore", version = "1.61",  dependencies = "after:UndergroundBiomes")
+@Mod(modid = WTFCore.modid, name = "WTFCore", version = "1.63",  dependencies = "after:UndergroundBiomes")
 
 public class WTFCore {
 
@@ -64,7 +65,6 @@ public class WTFCore {
 	{
 		proxy.clientRegister();
 		MinecraftForge.EVENT_BUS.register(new WorldGenListener());
-
 
 	}
 	@EventHandler

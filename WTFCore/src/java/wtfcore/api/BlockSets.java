@@ -3,7 +3,7 @@ package wtfcore.api;
 import java.util.HashMap;
 import java.util.HashSet;
 import net.minecraft.block.Block;
-import wtfcore.api.FracMethods.IFracture;
+import net.minecraft.item.Item;
 
 
 public class BlockSets {
@@ -16,12 +16,13 @@ public class BlockSets {
 	
 	
 	public static HashMap<Block, Integer> fallingBlocks = new HashMap<Block, Integer>();
-	public static HashMap<Block, IFracture> oreAndFractures = new HashMap<Block, IFracture>();
+	public static HashSet<Block> oreAndFractures = new HashSet<Block>();
 	public static HashMap<Block, Block> stoneAndCobble = new HashMap<Block, Block>();
 	public static HashMap<Block, Integer> explosiveBlocks = new HashMap<Block, Integer>();
 	public static HashMap<OreBlockInfo, Block> oreUbifier = new HashMap <OreBlockInfo, Block>();
 	public static HashMap <Block, Block> genReplace = new HashMap<Block, Block>();
 	public static HashMap<String, IStoneRegister> stoneRegisters = new HashMap<String, IStoneRegister>();
+	public static HashMap<Item, Item> itemReplacer = new HashMap<Item, Item>();
 	
 	//explosive Backstop
 	public static HashMap <Block,Float> explosiveModBlock = new HashMap<Block, Float>();
