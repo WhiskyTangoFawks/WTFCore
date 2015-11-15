@@ -20,7 +20,7 @@ import java.util.Iterator;
 
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = WTFCore.modid, name = "WTFCore", version = "1.63",  dependencies = "after:UndergroundBiomes")
+@Mod(modid = WTFCore.modid, name = "WTFCore", version = "1.65",  dependencies = "after:UndergroundBiomes")
 
 public class WTFCore {
 
@@ -63,7 +63,8 @@ public class WTFCore {
 	}
 	@EventHandler public void load(FMLInitializationEvent event)
 	{
-		proxy.clientRegister();
+		//this was where the texture overlay stuff got called
+		//proxy.clientRegister();
 		MinecraftForge.EVENT_BUS.register(new WorldGenListener());
 
 	}

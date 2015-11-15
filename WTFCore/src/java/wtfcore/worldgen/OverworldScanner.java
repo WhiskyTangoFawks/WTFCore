@@ -37,7 +37,7 @@ public class OverworldScanner implements IWorldScanner {
 		if (surfaceaverage < 64){ surfaceaverage = 64;}
 		
 		if (WorldGenListener.generator != null){
-			WorldGenListener.generator.generate(world, surfaceaverage, chunkX, chunkZ, rand);
+			WorldGenListener.generator.generate(world, surfaceaverage, chunkX, chunkZ, rand, null);
 		}
 	}
 	

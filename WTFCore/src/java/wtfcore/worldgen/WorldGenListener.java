@@ -27,6 +27,7 @@ public class WorldGenListener {
 		}
 		else {
 			WTFCore.log.info("No scanner found for dimension " + event.world.provider.dimensionId);
+			GetScanner.put(event.world.provider.dimensionId, new NullScanner());
 		}
 
 	}
