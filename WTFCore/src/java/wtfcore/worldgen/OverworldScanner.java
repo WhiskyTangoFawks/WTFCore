@@ -16,6 +16,7 @@ public class OverworldScanner implements IWorldScanner {
 	public void generate(World world, Random rand, int chunkX, int chunkZ)
 	{
 		
+
 		
 		int lastY = 70;
 		Chunk chunk = world.getChunkFromBlockCoords(chunkX, chunkZ);

@@ -34,10 +34,6 @@ public class LoadBlockSets {
 		addOreBlock(Blocks.lit_redstone_ore);
 		addOreBlock(Blocks.coal_ore);
 
-		BlockSets.explosiveModBlock.put(Blocks.iron_block, 0.8F);
-		BlockSets.explosiveModBlock.put(Blocks.diamond_block, 0.5F);
-		BlockSets.explosiveModBlock.put(Blocks.obsidian, 0.2F);
-
 		addExplosiveBlock(Blocks.redstone_ore, 2);
 		addExplosiveBlock(Blocks.lit_redstone_ore, 3);
 		addExplosiveBlock(Blocks.redstone_torch, 1);
@@ -53,7 +49,7 @@ public class LoadBlockSets {
 		BlockSets.meltBlocks.add(Blocks.flowing_lava);
 		BlockSets.meltBlocks.add(Blocks.water);
 		BlockSets.meltBlocks.add(Blocks.flowing_lava);
-		BlockSets.meltBlocks.add(Blocks.torch);
+		//BlockSets.meltBlocks.add(Blocks.torch);
 		BlockSets.meltBlocks.add(Blocks.fire);
 
 		BlockSets.ReplaceHashset.add(Blocks.stone);

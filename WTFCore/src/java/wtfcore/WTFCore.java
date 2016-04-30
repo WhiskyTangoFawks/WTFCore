@@ -1,8 +1,10 @@
 package wtfcore;
 
+import net.minecraft.init.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import wtfcore.api.BlockSets;
 import wtfcore.proxy.CommonProxy;
+import wtfcore.replacers.StoneReplacer;
 import wtfcore.utilities.LoadBlockSets;
 import wtfcore.utilities.UBCblocks;
 import wtfcore.worldgen.NetherScanner;
@@ -15,9 +17,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-
 import java.util.Iterator;
-
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = WTFCore.modid, name = "WTFCore", version = "1.66",  dependencies = "after:UndergroundBiomes")
@@ -29,6 +29,7 @@ public class WTFCore {
 	public static  final String WTFOres = "WTFOres";
 	public static  final String WTFTweaks = "WTFTweaks";
 
+		
 	public static Logger log;
 
 	@SidedProxy(clientSide="wtfcore.proxy.ClientProxy", serverSide="wtfcore.proxy.CommonProxy")
@@ -72,7 +73,9 @@ public class WTFCore {
 	public void PostInit(FMLPostInitializationEvent postEvent){
 
 		LoadBlockSets.setHashSets();
-
+		if (Loader.isModLoaded("UndergroundBiomes")){
+			BlockSets.genReplace.put(Blocks.stone, new StoneReplacer());
+		}
 
 
 	}
